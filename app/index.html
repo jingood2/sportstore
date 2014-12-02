@@ -13,28 +13,16 @@
     <script src="controllers/productListControllers.js"></script>
 </head>
 <body ng-controller="sportsStoreCtrl">
-<div class="navbar navbar-inverse">
-    <a class="navbar-brand" href="#">SPORTS STORE</a>
-</div>
-<div class="panel panel-default row" ng-controller="productListCtrl">
-    <div class="col-xs-3">
-        <a ng-click="selectCategory()" class="btn btn-block btn-default btn-lg">Home</a>
-        <a ng-repeat="item in data.products | orderBy:'category' | unique:'category'" ng-click="selectCategory(item)"
-                class="btn btn-block btn-default btn-lg", ng-class="getCategoryClass(item)">
-            {{item}}
-        </a>
+    <div class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#">SPORTS STORE</a>
     </div>
-    <div class="col-xs-8">
-        <div class="well" ng-repeat="item in data.products | filter:categoryFilterFn">
-            <h3>
-                <strong>{{item.name}}</strong>
-                <span class="pull-right label label-primary">
-                    {{item.price|currency}}
-                </span>
-            </h3>
-            <span class="lead">{{item.description}}</span>
-        </div>
+
+    <div class="alert alert-danger" ng-show="data.error">
+        Error({{data.error.status}}). The product data was not loaded.
+        <a href="/app/index.html" class="alert-link"> Click here to try again </a>
     </div>
-</div>
+
+    <ng-include src="'views/productList.html'"></ng-include>
+
 </body>
 </html>
